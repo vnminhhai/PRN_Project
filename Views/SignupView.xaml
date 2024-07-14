@@ -32,5 +32,6 @@
         <DatePicker Grid.Row="4" Grid.Column="1" Name="CbBirthDate" Text="{Binding Birthdate}"></DatePicker>
         <Button Command="{Binding SignupCommand}" Grid.Column="0" Grid.Row="5" Content="Signup"></Button>
         <Button Command="{Binding ToLoginCommand}" Grid.Column="1" Grid.Row="5" Content="Log in"></Button>
+        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}"/>
     </Grid>
 </UserControl>

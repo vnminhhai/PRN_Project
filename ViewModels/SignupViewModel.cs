@@ -38,6 +38,31 @@ public class SignupViewModel:ViewModel
             SetField(ref password, value);
         }
     }
+    
+    public string Password2 
+    { 
+        get => password2;
+        set
+        {
+            SetField(ref password2, value);
+        }
+    }
+    public string Fullname 
+    { 
+        get => fullname;
+        set
+        {
+            SetField(ref fullname, value);
+        }
+    }
+    public DateOnly Birthdate 
+    { 
+        get => birthdate;
+        set
+        {
+            SetField(ref birthdate, value);
+        }
+    }
     public SignupViewModel(Navigation navigation)
     {
         username = "";
@@ -51,7 +76,7 @@ public class SignupViewModel:ViewModel
     }
     void Signup(Navigation navigation)
     {
-        MessageBox.Show(username +" "+birthdate+" "+fullname+" "+password+" "+password2);
+        MessageBox.Show(username +" "+birthdate+" "+fullname+" Password: "+password+" "+password2);
         User u = new User();
         u.Name = username;
         u.Password = password;
@@ -59,12 +84,12 @@ public class SignupViewModel:ViewModel
         u.BirthDate = birthdate;
         try
         {
-            authService.signup(u);
+            User? loggedUser = authService.signup(u);
+            navigation.ViewModel = new DashBoardViewModel(loggedUser,navigation);
         }
         catch (Exception e)
         {
-            ErrorMessage = "Username already exists.";
+            ErrorMessage = "Error.";
         }
-        navigation.ViewModel = new DashBoardViewModel(u,navigation);
     }
 }
