@@ -6,8 +6,41 @@
              xmlns:vm="clr-namespace:PRN_Project_Summer_2024.ViewModels"
              >
     <Application.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="DarkTurquoise"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        
         <DataTemplate DataType="{x:Type vm:LoginPageViewModel}">
-            <views:LoginView/>
+            <views:LoginView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SignupViewModel}">
+            <views:SignupView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashBoardViewModel}">
+            <views:DashBoardView/>
+        </DataTemplate>
+        <!-- Add more DataTemplates for other views -->
     </Application.Resources>
 </Application>

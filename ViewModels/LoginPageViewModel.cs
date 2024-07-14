@@ -16,6 +16,7 @@ public class LoginPageViewModel : ViewModel
     public ObservableCollection<User> Users { get; set; }
     public string ErrorMessage { get => errorMessage; set => SetField(ref errorMessage,value); }
     public ICommand LoginCommand { get; set; }
+    public ICommand ToSignupCommand { get; set; }
     public string Username
     {
         get => username;
@@ -39,6 +40,7 @@ public class LoginPageViewModel : ViewModel
         ErrorMessage = "Fill in all the fields";
         authService = new AuthenService();
         LoginCommand = new BaseCommand(()=>Login(navigation));
+        ToSignupCommand = new BaseCommand(()=>ToSignup(navigation));
     }
     void Login(Navigation navigation)
     {
@@ -50,7 +52,11 @@ public class LoginPageViewModel : ViewModel
         }
         else
         {
-            navigation.ViewModel = new DashBoardViewModel(navigation);
+            navigation.ViewModel = new DashBoardViewModel(u, navigation);
         }
+    }
+    void ToSignup(Navigation navigation)
+    {
+        navigation.ViewModel = new SignupViewModel(navigation);
     }
 }
