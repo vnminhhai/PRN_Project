@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRN_Project_Summer_2024"
+        xmlns:vm="clr-namespace:PRN_Project_Summer_2024.ViewModels"
+        xmlns:views="clr-namespace:PRN_Project_Summer_2024.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:LoginPageViewModel}">
+            <views:LoginView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashBoardViewModel}">
+            <!-- Replace with your DashboardView -->
+        </DataTemplate>
+        <!-- Add more DataTemplates for other views -->
+    </Window.Resources>
     <Grid>
-
+        <ContentControl Name="ContentControl" Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
