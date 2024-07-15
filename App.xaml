@@ -41,6 +41,15 @@
         <DataTemplate DataType="{x:Type vm:DashBoardViewModel}">
             <views:DashBoardView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddTaskViewModel}">
+            <views:AddTaskView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TaskDetailViewModel}">
+            <views:TaskDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RepeatScheduleEditViewModel}">
+            <views:RepeatScheduleEditView/>
+        </DataTemplate>
         <!-- Add more DataTemplates for other views -->
     </Application.Resources>
 </Application>

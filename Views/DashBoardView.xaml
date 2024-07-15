@@ -7,12 +7,27 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding CurrentUserGreet}"></TextBlock>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding TaskList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Task" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Time" Binding="{Binding Time, StringFormat=\{0:MM/dd/yyyy\}}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="0" Grid.Column="1" Content="Add task" Command="{Binding AddTask}"></Button>
     </Grid>
 </UserControl>

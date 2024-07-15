@@ -11,12 +11,12 @@ public class TaskRepository
     
     public List<Task> GetTasksByUsername(string username)
     {
-        return context.Tasks.Include(t=>t.RepeatSchedules).Where(t => t.Username == username).ToList();
+        return context.Tasks.Include(t=>t.RepeatSchedule).Where(t => t.Username == username).ToList();
     }
     
     public void UpdateTaskStatus(int id, string username, string status)
     {
-        foreach (Task t in context.Tasks.Include(t=>t.RepeatSchedules).Where(t => t.Id == id && t.Username.Equals(username)))
+        foreach (Task t in context.Tasks.Include(t=>t.RepeatSchedule).Where(t => t.Id == id && t.Username.Equals(username)))
         {
             t.Status = status;
         }
