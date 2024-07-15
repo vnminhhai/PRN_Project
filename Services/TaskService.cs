@@ -9,7 +9,7 @@ public class TaskService
     private PrnProjectSummer2024Context context = PrnProjectSummer2024Context.Context;
     public List<Task> GetTasksByDate(string username, DateOnly date)
     {
-        return context.Tasks.Where(t => t.Username.Equals(username)).ToList();
+        return context.Tasks.Where(t => t.Username.Equals(username) && DateOnly.FromDateTime(t.Time).Equals(date)).ToList();
     }
     
     public void AddTask(Task t)

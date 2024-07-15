@@ -15,8 +15,11 @@ public class AddTaskViewModel:ViewModel
     private string Title;
     private string Detail;
     private string Priority;
-    private DateTime Time;
+    private DateTime Time = DateTime.Now;
 
+    private string[] Priorities= new []{"High", "Medium", "Low"};
+    
+    public string[] PriorityLevels => Priorities;
     public string DayText
     {
         get => Date;

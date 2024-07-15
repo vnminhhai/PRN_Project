@@ -29,5 +29,15 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Row="0" Grid.Column="1" Content="Add task" Command="{Binding AddTask}"></Button>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="3" Grid.Column="0" Content="Previous" Command="{Binding Prev}"></Button>
+            <DatePicker Grid.Column="1" Text="{Binding SelectedDay}"></DatePicker>
+            <Button Grid.Row="3" Grid.Column="2" Content="Next" Command="{Binding Next}"></Button>
+        </Grid>
     </Grid>
 </UserControl>

@@ -35,15 +35,15 @@
 
             <TextBlock Grid.Row="1" Grid.Column="0"  Text="Detail:" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TaskDetail}"/>
-
+            
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Priority:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TaskPriority}" />
+            <ComboBox ItemsSource="{Binding PriorityLevels}" SelectedItem="{Binding TaskPriority}" Grid.Row="2" Grid.Column="1" Text="Priority:"/>
             
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Time:"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding TaskTime}" />
             
-            <Button Grid.Row="4" Grid.Column="0" Content="Add"></Button>
-            <Button Grid.Row="4" Grid.Column="1" Content="Cancel"></Button>
+            <Button Grid.Row="4" Grid.Column="0" Content="Add" Command="{Binding AddTask}"></Button>
+            <Button Grid.Row="4" Grid.Column="1" Content="Cancel" Command="{Binding Cancel}"></Button>
         </Grid>
     </Grid>
 </UserControl>
