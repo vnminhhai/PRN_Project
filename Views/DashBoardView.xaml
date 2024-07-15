@@ -20,15 +20,29 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding CurrentUserGreet}"></TextBlock>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding TaskList}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Task" Binding="{Binding Title}"/>
-                <DataGridTextColumn Header="Time" Binding="{Binding Time, StringFormat=\{0:MM/dd/yyyy\}}"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Grid.Row="0" Grid.Column="1" Content="Add task" Command="{Binding AddTask}"></Button>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="2*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                <DataGrid.Columns>    
+                    <DataGridTextColumn Width="*" Header="Task" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Width="*" Header="Time" Binding="{Binding Time, StringFormat=\{0:HH:mm\}}"/>
+                    <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Width="*" Header="Priority" Binding="{Binding Priority}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Command="{Binding UpdateTaskStatus}" CommandParameter="{Binding SelectedTask.Id}">Status</Button>
+                    <Button Grid.Row="1" Command="{Binding ToDetail}">Detail</Button>
+                </Grid>
+        </Grid>
+        <Button Grid.Column="1" Command="{Binding AddTask}">Add Task</Button>
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

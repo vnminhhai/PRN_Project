@@ -7,6 +7,40 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Time, StringFormat=\{0:HH:mm\}}"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Status}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Description}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Priority, StringFormat=\{0:HH:mm\}}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Repeat}"></TextBlock>
+
+        <DataGrid Grid.Row="3" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding Steps, Mode=TwoWay}" SelectedItem="{Binding SelectedStep, Mode=TwoWay}">
+            <DataGrid.Columns>    
+                <DataGridTextColumn Width="*" Header="No" Binding="{Binding Number}"/>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Command="{Binding AddStep}">Add step</Button>
+            <Button Grid.Row="1" Command="{Binding RemoveStep}">Delete step</Button>
+        </Grid>
+        <Button Grid.Row="4" Grid.Column="1" Command="{Binding ToDashBoard}">Back</Button>
     </Grid>
 </UserControl>

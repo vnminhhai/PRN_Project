@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using PRN_Project_Summer_2024.Command;
 using PRN_Project_Summer_2024.Models;
 using PRN_Project_Summer_2024.Services;
@@ -13,7 +14,15 @@ public class DashBoardViewModel:ViewModel
     private List<Task> Tasks;
     private DateOnly SelectedDate;
     private string greeting;
-
+    private Task _selectedTask;
+    public Task SelectedTask
+    {
+        get => _selectedTask;
+        set
+        {
+            _selectedTask = value;
+        }
+    }
     public DateOnly SelectedDay
     {
         get => SelectedDate;
@@ -28,6 +37,8 @@ public class DashBoardViewModel:ViewModel
     public ICommand AddTask { get; set; }
     public ICommand Next { get; set; }
     public ICommand UpdateTaskStatus { get; set; }
+    
+    public ICommand ToDetail { get; set; }
 
     public string CurrentUserGreet
     {
@@ -41,6 +52,19 @@ public class DashBoardViewModel:ViewModel
         SelectedDate = DateOnly.FromDateTime(DateTime.Now);
         Tasks = new TaskService().GetTasksByDate(u.Name, SelectedDate);
         greeting=$"Hello, {CurrentUser.FullName}\nHere are your tasks for {SelectedDate.ToString()}";
+        ToDetail = new BaseCommand(
+            () =>
+            {
+                if (_selectedTask==null) {MessageBox.Show("Pick a task first"); return;}
+                navigation.ViewModel = new TaskDetailViewModel(_selectedTask.Id, u, navigation);
+            });
+        
+        UpdateTaskStatus = new ParamCommand((taskId) =>
+        {
+            if (_selectedTask==null) {MessageBox.Show("Pick a task first"); return;}
+            new TaskService().UpdateStatusById(_selectedTask.Id);
+            TaskList = new TaskService().GetTasksByDate(u.Name, SelectedDate);
+        }, (o) => true);
         Prev = new BaseCommand(() =>
         {
             SelectedDay = SelectedDate.AddDays(-1);
@@ -56,6 +80,5 @@ public class DashBoardViewModel:ViewModel
             CurrentUserGreet=$"Hello, {CurrentUser.FullName}\nHere are your tasks for {SelectedDate.ToString()}";
             TaskList = new TaskService().GetTasksByDate(u.Name, SelectedDate);
         });
-        UpdateTaskStatus = new BaseCommand(()=> { });
     }
 }

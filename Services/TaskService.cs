@@ -24,4 +24,20 @@ public class TaskService
         context.Tasks.Remove(t);
         context.SaveChanges();
     }
+    
+    public void UpdateStatusById(int id)
+    {
+        Task? t = context.Tasks.Find(id);
+        if (t != null)
+        {
+            t.Status = t.Status.Equals("Done") ? "Not Done" : "Done";
+        }
+        context.SaveChanges();
+    }
+    public Task? GetTaskById(int id)
+    {
+        return context.Tasks.Include(t=>t.Steps)
+            .Include(t=>t.RepeatSchedule)
+            .SingleOrDefault(t=>t.Id==id);
+    }
 }
