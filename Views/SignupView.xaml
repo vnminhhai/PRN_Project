@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:PRN_Project_Summer_2024.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <Border Padding="20">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                <GradientStop Color="#5bc3ff"/>
+                <GradientStop Color="#3aa0ff" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -34,4 +41,5 @@
         <Button Command="{Binding ToLoginCommand}" Grid.Column="1" Grid.Row="5" Content="Log in"></Button>
         <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}"/>
     </Grid>
+        </Border>
 </UserControl>

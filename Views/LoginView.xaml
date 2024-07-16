@@ -6,24 +6,76 @@
              xmlns:local="clr-namespace:PRN_Project_Summer_2024.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Border Padding="20">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                <GradientStop Color="#5bc3ff"/>
+                <GradientStop Color="#3aa0ff" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
+        <Grid.RowDefinitions >
+            <RowDefinition Height="0.7*" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="User name"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="TbUsername" Text="{Binding Username}"></TextBox>
-        
-        <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="TbPassword" Text="{Binding Password}"></TextBox>
-        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}" FontSize="15" Foreground="Red"/>
-        <Button Command="{Binding LoginCommand}" Grid.Column="0" Grid.Row="3" Content="Login"></Button>
-        <Button Command="{Binding ToSignupCommand}" Grid.Column="1" Grid.Row="3" Content="Sign up"></Button>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Login" FontWeight="Black" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
+        <Label Grid.Row="1" Content="User name"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="TbUsername" Text="{Binding Username}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" Content="Password"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="TbPassword" Text="{Binding Password}"></TextBox>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}" FontSize="15" Foreground="Red"/>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button  Command="{Binding LoginCommand}" Grid.Column="0" Content="Login"><Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#0099FF"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#189E9D"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="120" Height="40"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template></Button>
+            <Button Command="{Binding ToSignupCommand}" Grid.Column="1" Content="Sign up"><Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightSeaGreen"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="SeaGreen"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="120" Height="40"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template></Button>
+        </Grid>
     </Grid>
+    </Border>
 </UserControl>
