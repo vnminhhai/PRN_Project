@@ -12,6 +12,13 @@ public class RepeatScheduleRepository
     
     public void AddRepeatSchedule(RepeatSchedule repeatSchedule)
     {
+        foreach (RepeatSchedule rs in PrnProjectSummer2024Context.Context.RepeatSchedules)
+        {
+            if (rs.Equals(repeatSchedule))
+            {
+                return;
+            }
+        }
         PrnProjectSummer2024Context.Context.RepeatSchedules.Add(repeatSchedule);
         PrnProjectSummer2024Context.Context.SaveChanges();
     }

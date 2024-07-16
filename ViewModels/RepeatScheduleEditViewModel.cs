@@ -1,21 +1,23 @@
 ﻿using System.Windows.Input;
 using PRN_Project_Summer_2024.Command;
 using PRN_Project_Summer_2024.Models;
+using PRN_Project_Summer_2024.Services;
 using PRN_Project_Summer_2024.Util;
 
 namespace PRN_Project_Summer_2024.ViewModels;
 
 public class RepeatScheduleEditViewModel:ViewModel
 {
-    private string _type;
-    private int _hour;
-    private string _weekDay;
-    private int _day;
+    private string? _type;
+    private int? _hour;
+    private string? _weekDay;
+    private int? _day;
     private string _hourVisibility;
     private string _weekDayVisibility;
     private string _dayVisibility;
-    private string[] _repeatTypes = new[] {"Daily", "Weekly", "Monthly"};
+    private string[] _repeatTypes = new[] {"None", "Daily", "Weekly", "Monthly"};
     private string[] _weekDays = new[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
     public string HourVisibility
     {
         get => _hourVisibility;
@@ -41,15 +43,18 @@ public class RepeatScheduleEditViewModel:ViewModel
         }
     }
     
-    public string Type
+    public string? Type
     {
         get => _type;
         set
         {
-            SetField(ref _type, value);
+            SetField(ref _type, value=="None"?null:value);
+            DayVisibility=value=="Monthly"?"Visible":"Hidden";
+            HourVisibility =value=="Daily"?"Visible":"Hidden";
+            WeekDayVisibility=value=="Weekly"?"Visible":"Hidden";
         }
     }
-    public int Hour
+    public int? Hour
     {
         get => _hour;
         set
@@ -57,15 +62,12 @@ public class RepeatScheduleEditViewModel:ViewModel
             SetField(ref _hour, value);
         }
     }
-    public string MonthDay
+    public int? MonthDay
     {
-        get => _day.ToString();
+        get => _day;
         set
         {
-            if (int.TryParse(value, out int day))
-            {
-                SetField(ref _day, day);
-            }
+            SetField(ref _day, value);
         }
     }
 
@@ -84,6 +86,12 @@ public class RepeatScheduleEditViewModel:ViewModel
     {
         Confirm = new BaseCommand(() =>
         {
+            RepeatSchedule rs = new RepeatSchedule();
+            rs.RepeatCycle = Type??"None";
+            if (Type?.Equals("Daily")??false) rs.Hour = Hour;
+            if (Type?.Equals("Monthly")??false) rs.Day = MonthDay;
+            if (Type?.Equals("Weekly")??false) rs.WeekDay = WeekDay;
+            new RepeatScheduleService().UpdateScheduleByTaskId(taskId, rs);
             navigation.ViewModel = new TaskDetailViewModel(taskId, u, navigation);
         });
         Cancel= new BaseCommand(() =>

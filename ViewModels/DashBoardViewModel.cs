@@ -10,10 +10,10 @@ namespace PRN_Project_Summer_2024.ViewModels;
 
 public class DashBoardViewModel:ViewModel
 {
-    private User CurrentUser;
-    private List<Task> Tasks;
-    private DateOnly SelectedDate;
-    private string greeting;
+    private User _currentUser;
+    private List<Task> _tasks;
+    private DateOnly _selectedDate;
+    private string _greeting;
     private Task _selectedTask;
     public Task SelectedTask
     {
@@ -25,13 +25,19 @@ public class DashBoardViewModel:ViewModel
     }
     public DateOnly SelectedDay
     {
-        get => SelectedDate;
-        set => SetField(ref SelectedDate, value);
+        get => _selectedDate;
+        set
+        {
+            CurrentUserGreet=$"Hello, {_currentUser.FullName}\nHere are your tasks for {value.ToString()}";
+            SetField(ref _selectedDate, value);
+            TaskList = new TaskService().GetTasksByDate(_currentUser.Name, value);
+        }
     }
+
     public List<Task> TaskList
     {
-        get => Tasks;
-        set => SetField(ref Tasks, value);
+        get => _tasks;
+        set => SetField(ref _tasks, value);
     }
     public ICommand Prev { get; set; }
     public ICommand AddTask { get; set; }
@@ -42,16 +48,16 @@ public class DashBoardViewModel:ViewModel
 
     public string CurrentUserGreet
     {
-        get => greeting;
-        set => SetField(ref greeting, value);
+        get => _greeting;
+        set => SetField(ref _greeting, value);
     }
 
     public DashBoardViewModel(User u, Navigation navigation)
     {
-        CurrentUser = u;
-        SelectedDate = DateOnly.FromDateTime(DateTime.Now);
-        Tasks = new TaskService().GetTasksByDate(u.Name, SelectedDate);
-        greeting=$"Hello, {CurrentUser.FullName}\nHere are your tasks for {SelectedDate.ToString()}";
+        _currentUser = u;
+        _selectedDate = DateOnly.FromDateTime(DateTime.Now);
+        _tasks = new TaskService().GetTasksByDate(u.Name, _selectedDate);
+        _greeting=$"Hello, {_currentUser.FullName}\nHere are your tasks for {_selectedDate.ToString()}";
         ToDetail = new BaseCommand(
             () =>
             {
@@ -63,22 +69,18 @@ public class DashBoardViewModel:ViewModel
         {
             if (_selectedTask==null) {MessageBox.Show("Pick a task first"); return;}
             new TaskService().UpdateStatusById(_selectedTask.Id);
-            TaskList = new TaskService().GetTasksByDate(u.Name, SelectedDate);
+            TaskList = new TaskService().GetTasksByDate(u.Name, _selectedDate);
         }, (o) => true);
         Prev = new BaseCommand(() =>
         {
-            SelectedDay = SelectedDate.AddDays(-1);
-            CurrentUserGreet=$"Hello, {CurrentUser.FullName}\nHere are your tasks for {SelectedDate.ToString()}";
-            TaskList = new TaskService().GetTasksByDate(u.Name, SelectedDate);
+            SelectedDay = _selectedDate.AddDays(-1);
         });
         AddTask = new BaseCommand(() =>
         {
-            navigation.ViewModel = new AddTaskViewModel(u, SelectedDate, navigation);
+            navigation.ViewModel = new AddTaskViewModel(u, _selectedDate, navigation);
         });
         Next = new BaseCommand(()=> {
-            SelectedDay = SelectedDate.AddDays(1);
-            CurrentUserGreet=$"Hello, {CurrentUser.FullName}\nHere are your tasks for {SelectedDate.ToString()}";
-            TaskList = new TaskService().GetTasksByDate(u.Name, SelectedDate);
+            SelectedDay = _selectedDate.AddDays(1);
         });
     }
 }

@@ -17,6 +17,20 @@ public class TaskDetailViewModel:ViewModel
     private string _priority;
     private Step _selectedStep;
     private List<Step> _steps;
+    private string _stepName;
+    private bool _popupOpened;
+    
+    public string StepName
+    {
+        get => _stepName;
+        set => SetField(ref _stepName, value);
+    }
+    
+    public bool PopupOpened
+    {
+        get => _popupOpened;
+        set => SetField(ref _popupOpened, value);
+    }
 
     public string Title
     {
@@ -63,7 +77,8 @@ public class TaskDetailViewModel:ViewModel
     public ICommand ToDashBoard { get; set; }
     public ICommand AddStep { get; set; }
     public ICommand RemoveStep { get; set; }
-    
+    public ICommand OpenPopup { get; set; }
+    public ICommand ClosePopup { get; set; }
     public ICommand SetRep { get; set; }
     public Task Task
     {
@@ -91,7 +106,7 @@ public class TaskDetailViewModel:ViewModel
             {
                 TaskId = _task.Id,
                 Number = _task.Steps.Count + 1,
-                Name = "New Step "+(Steps.Count+1),
+                Name = StepName,
                 Status = "Not Done"
             };
             _task.Steps.Add(newStep);
@@ -111,6 +126,15 @@ public class TaskDetailViewModel:ViewModel
             Steps = _task.Steps.ToList();
             PrnProjectSummer2024Context.Context.SaveChanges();
         });
+        OpenPopup = new BaseCommand(() =>
+        {
+            PopupOpened = true;
+        });
+        ClosePopup = new BaseCommand(() =>
+        {
+            PopupOpened = false;
+        });
+        
         SetRep = new BaseCommand(() =>
         {
             navigation.ViewModel = new RepeatScheduleEditViewModel(u, taskId, navigation);

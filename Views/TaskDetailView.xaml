@@ -11,7 +11,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -39,9 +39,25 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Command="{Binding AddStep}">Add step</Button>
+            <Button Grid.Row="0" Command="{Binding OpenPopup}">Add step</Button>
             <Button Grid.Row="1" Command="{Binding RemoveStep}">Delete step</Button>
         </Grid>
         <Button Grid.Row="4" Grid.Column="1" Command="{Binding ToDashBoard}">Back</Button>
+        <Popup Placement="Center" IsOpen="{Binding PopupOpened}">
+            <Grid Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock>Step name:</TextBlock>
+                <TextBox Grid.Column="1" Text="{Binding StepName}" />
+                <Button Grid.Row="1" Command="{Binding AddStep}">Add step</Button>
+                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ClosePopup}">Cancel</Button>
+            </Grid>
+        </Popup>
     </Grid>
 </UserControl>

@@ -21,13 +21,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Label Content="Repeat type"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Text="{Binding Type}" Visibility="{Binding }"></ComboBox>
+        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding RepeatTypes}" Text="{Binding Type}" SelectedItem="{Binding Type}"></ComboBox>
         <Label Grid.Row="1" Grid.Column="0" Content="Hour"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Text="{Binding Hour}" Visibility="{Binding }"></ComboBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Hour}" Visibility="{Binding HourVisibility}"></TextBox>
         <Label Grid.Row="2" Grid.Column="0" Content="Week day"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Text="{Binding WeekDay}" Visibility="{Binding }"></ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding WeekDays}" Text="{Binding WeekDay}" Visibility="{Binding WeekDayVisibility}"></ComboBox>
         <Label Grid.Row="3" Grid.Column="0" Content="Month day"/>
-        <ComboBox Grid.Row="3" Grid.Column="1" Text="{Binding MonthDay}" Visibility="{Binding }"></ComboBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MonthDay}" Visibility="{Binding DayVisibility}"></TextBox>
         <Button Command="{Binding Confirm}" Grid.Column="0" Grid.Row="5" Content="Save"></Button>
         <Button Command="{Binding Cancel}" Grid.Column="1" Grid.Row="5" Content="Cancel"></Button>
         <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}"/>

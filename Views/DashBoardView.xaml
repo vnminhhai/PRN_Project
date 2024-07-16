@@ -50,7 +50,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Grid.Row="3" Grid.Column="0" Content="Previous" Command="{Binding Prev}"></Button>
-            <DatePicker Grid.Column="1" Text="{Binding SelectedDay}"></DatePicker>
+            <DatePicker Grid.Column="1" Text="{Binding SelectedDay, Mode=TwoWay}"></DatePicker>
             <Button Grid.Row="3" Grid.Column="2" Content="Next" Command="{Binding Next}"></Button>
         </Grid>
     </Grid>
