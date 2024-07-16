@@ -63,6 +63,8 @@ public class TaskDetailViewModel:ViewModel
     public ICommand ToDashBoard { get; set; }
     public ICommand AddStep { get; set; }
     public ICommand RemoveStep { get; set; }
+    
+    public ICommand SetRep { get; set; }
     public Task Task
     {
         get => _task;
@@ -108,6 +110,10 @@ public class TaskDetailViewModel:ViewModel
             }
             Steps = _task.Steps.ToList();
             PrnProjectSummer2024Context.Context.SaveChanges();
+        });
+        SetRep = new BaseCommand(() =>
+        {
+            navigation.ViewModel = new RepeatScheduleEditViewModel(u, taskId, navigation);
         });
     }
 }

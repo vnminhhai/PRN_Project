@@ -1,4 +1,6 @@
-﻿using PRN_Project_Summer_2024.Models;
+﻿using System.Windows.Input;
+using PRN_Project_Summer_2024.Command;
+using PRN_Project_Summer_2024.Models;
 using PRN_Project_Summer_2024.Util;
 
 namespace PRN_Project_Summer_2024.ViewModels;
@@ -73,11 +75,20 @@ public class RepeatScheduleEditViewModel:ViewModel
         set {SetField(ref _weekDay, value);}
     }
     
+    public ICommand Confirm { get; set; }
+    public ICommand Cancel { get; set; }
     public string[] RepeatTypes => _repeatTypes;
     public string[] WeekDays => _weekDays;
 
-    public RepeatScheduleEditViewModel(User u, Navigation navigation)
+    public RepeatScheduleEditViewModel(User u, int taskId, Navigation navigation)
     {
-        
+        Confirm = new BaseCommand(() =>
+        {
+            navigation.ViewModel = new TaskDetailViewModel(taskId, u, navigation);
+        });
+        Cancel= new BaseCommand(() =>
+        {
+            navigation.ViewModel = new TaskDetailViewModel(taskId, u, navigation);
+        });
     }
 }

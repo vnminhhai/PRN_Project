@@ -28,8 +28,8 @@
         <ComboBox Grid.Row="2" Grid.Column="1" Text="{Binding WeekDay}" Visibility="{Binding }"></ComboBox>
         <Label Grid.Row="3" Grid.Column="0" Content="Month day"/>
         <ComboBox Grid.Row="3" Grid.Column="1" Text="{Binding MonthDay}" Visibility="{Binding }"></ComboBox>
-        <Button Command="{Binding SignupCommand}" Grid.Column="0" Grid.Row="5" Content="Save"></Button>
-        <Button Command="{Binding ToLoginCommand}" Grid.Column="1" Grid.Row="5" Content="Cancel"></Button>
+        <Button Command="{Binding Confirm}" Grid.Column="0" Grid.Row="5" Content="Save"></Button>
+        <Button Command="{Binding Cancel}" Grid.Column="1" Grid.Row="5" Content="Cancel"></Button>
         <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding ErrorMessage}"/>
     </Grid>
 </UserControl>

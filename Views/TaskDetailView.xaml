@@ -26,6 +26,7 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Priority, StringFormat=\{0:HH:mm\}}"></TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Repeat}"></TextBlock>
 
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding SetRep}">Set repetition</Button>
         <DataGrid Grid.Row="3" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding Steps, Mode=TwoWay}" SelectedItem="{Binding SelectedStep, Mode=TwoWay}">
             <DataGrid.Columns>    
                 <DataGridTextColumn Width="*" Header="No" Binding="{Binding Number}"/>
