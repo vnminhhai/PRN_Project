@@ -46,6 +46,7 @@ public class DashBoardViewModel:ViewModel
     
     public ICommand ToDetail { get; set; }
 
+    public ICommand Logout { get; set; }
     public string CurrentUserGreet
     {
         get => _greeting;
@@ -64,7 +65,10 @@ public class DashBoardViewModel:ViewModel
                 if (_selectedTask==null) {MessageBox.Show("Pick a task first"); return;}
                 navigation.ViewModel = new TaskDetailViewModel(_selectedTask.Id, u, navigation);
             });
-        
+        Logout = new BaseCommand(() =>
+        {
+            navigation.ViewModel = new LoginPageViewModel(navigation);
+        });
         UpdateTaskStatus = new ParamCommand((taskId) =>
         {
             if (_selectedTask==null) {MessageBox.Show("Pick a task first"); return;}

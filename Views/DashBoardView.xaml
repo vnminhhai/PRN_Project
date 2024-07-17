@@ -16,7 +16,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -27,6 +27,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding CurrentUserGreet}"></TextBlock>
+        <Button Grid.Column="2" Command="{Binding Logout}">Logout</Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition  Width="2*"/>
